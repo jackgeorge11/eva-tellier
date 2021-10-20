@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@100;200;300;400;500;600;700&family=Cuprum:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Khand:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap');
+
+// FONTS
+
+// $font: 'Advent Pro', sans-serif;
+// $font: 'Cuprum', sans-serif;
+// $font: 'Khand', sans-serif;
+// $font: 'Quicksand', sans-serif;
+// $font: 'Rubik', sans-serif;
+$font: 'Raleway', sans-serif;
+
+$thin: 300;
+$reg: 400;
+$thick: 500;
+
+$sm: .875rem;
+$md: 1rem;
+$lg: 1.3rem;
+$xlg: 2.2rem;
+
+// COLORS
+
+$primary: #000;
+$secondary: #ceaff7;
+$tertiary: #afcbf7;
+$quaternary: #d0f9df;
+$quinary: #f1ffc7;
+$colors: primary, secondary, tertiary, quaternary, quinary;
+
+$clay: rgb(151, 39, 5);
+
+    // OPACITY
+    $light: .35;
+    $lighter: .2;
+
+// MARGINS
+
+$m-sm: .5rem;
+$m-md: 1rem;
+$m-lg: 1.5rem;
+$m-xlg: 2rem;
+
+// TRANSITIONS
+
+$short: .3s;
+$long: .5s;

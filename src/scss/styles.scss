@@ -1,0 +1,10 @@
+@import 'variables';
+// @import 'mixins';
+@import 'gridz';
+@import 'home';
+
+body {
+    color: $primary;
+    font-family: $font;
+    margin: 0;
+}

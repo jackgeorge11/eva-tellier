@@ -1,0 +1,122 @@
+.right {
+    width: calc(70% - $m-sm);
+    display: flex;
+    height: fit-content;
+
+    .project {
+        height: 100vh;
+        min-height: 100vh;
+        overflow: hidden;
+        width: calc($m-lg - 2px);
+        border-left: 1px dashed $primary;
+        border-right: 1px dashed $primary;
+        content: " ";
+        cursor: pointer;
+        transition: all $short, flex $short $short;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        
+        img {
+            width: 800px;
+            max-width: 800px;
+            height: auto;
+            padding: $m-md 0;
+            opacity: 0;
+            transition: all $short;
+        }
+
+        h1, p {
+            transition: all $short;
+            align-self: flex-start;
+            opacity: 0;
+            
+            &.title {
+                font-size: $lg;
+                font-weight: $thick;
+                margin: $m-xlg $m-lg $m-sm;
+            }
+
+            &.description {
+                font-size: $md;
+                font-weight: $thin;
+                margin: $m-sm $m-lg $m-xlg;
+            }
+
+            &.subtitle {
+                @extend .description;
+                font-weight: $thick;
+            }
+
+            .italic {
+                font-style: italic;
+            }
+        }
+
+        &.about {
+            margin-left: auto;
+
+            p {
+                margin: $m-sm $m-lg;
+            }
+        }
+
+        h3 {
+            white-space: nowrap;
+            font-size: $md;
+            font-weight: $thin;
+            position: absolute;
+            
+            &.date {
+                left: -$m-sm;
+                bottom: 0;
+                transform: rotate(-90deg);
+                transform-origin: 0 0;
+                margin: 0 $m-sm 0;
+            }
+
+            &.intro {
+                // color: $clay;
+                right: calc(100% - $m-md - 5px);
+                top: -$m-md;
+                transform: rotate(-90deg);
+                transform-origin: 100% 100%;
+                opacity: $light;
+                transition: all $short $short;
+                // visibility: hidden;
+            }
+        }
+
+        &:hover {
+            width: calc($m-xlg - 2px);
+        }
+
+        &.is--open {
+            transition: all $short;
+            flex: 1;
+            overflow: scroll;
+
+            &:hover {
+                width: auto;
+            }
+
+            h1, p {
+                transition: all $short, opacity $short $short;
+                opacity: 1;
+            }
+
+            .intro {
+                opacity: 0;
+                transition: opacity $short;
+            }
+
+            img {
+                transition: all $short, opacity $short $short;
+                max-width: 95%;
+                opacity: 1;
+            }
+        }
+    }
+}
