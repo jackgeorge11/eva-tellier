@@ -1,23 +1,70 @@
 import React, { useState, useRef } from "react";
 import "../scss/styles.scss";
-import Gridz from "../components/Gridz";
+import Projects from "../components/Projects";
+import { useStaticQuery, graphql } from "gatsby";
+import Info from "../components/Info";
 
 const IndexPage = () => {
+  const { allContentfulInfo, allContentfulProject } = useStaticQuery(graphql`
+    query MyQuery {
+      allContentfulInfo {
+        nodes {
+          content {
+            raw
+          }
+          slug
+          title
+        }
+      }
+      allContentfulProject {
+        nodes {
+          slug
+          content {
+            raw
+            references {
+              ... on ContentfulAsset {
+                contentful_id
+                __typename
+                gatsbyImageData(placeholder: DOMINANT_COLOR)
+              }
+            }
+          }
+          title
+          year
+        }
+      }
+    }
+  `);
 
-  const falseStates = {
-    about: false,
-    euphrates: false,
-    tigris: false,
-    sakarya: false,
+  const info = allContentfulInfo.nodes;
+  const projects = allContentfulProject.nodes;
+
+  const getAllSlugs = (info, projects) => {
+    const slugs = [];
+    info.forEach((tab) => {
+      return slugs.push(tab.slug);
+    });
+    projects.forEach((tab) => {
+      return slugs.push(tab.slug);
+    });
+    return slugs;
   };
+
+  const allSlugs = getAllSlugs(info, projects);
+
+  const getFalseStates = (slugs) => {
+    let falseStates = {};
+    for (let i = 0; i < slugs.length; i++) {
+      falseStates[slugs[i]] = false;
+    }
+    return falseStates;
+  };
+
+  const falseStates = getFalseStates(allSlugs);
 
   const [openStates, setOpenStates] = useState(falseStates);
 
-  const about = useRef();
-  const euphrates = useRef();
-  const tigris = useRef();
-  const sakarya = useRef();
-  const refs = [about, euphrates, tigris, sakarya]
+  const refs = useRef({});
 
   const handleClick = (project, refs) => {
     if (openStates[project]) {
@@ -30,67 +77,67 @@ const IndexPage = () => {
         [project]: true,
       });
     }
-    refs.forEach(ref => {
-      ref.current.scrollTop = 0;
+    allSlugs.forEach((s) => {
+      console.log(s);
+      console.log(refs?.current[s]);
+      if (refs?.current[s]) {
+        refs.current[s].scrollTop = 0;
+      }
     });
   };
 
-  const [color, setColor] = useState('primary')
-
-  const handleColor = (color) => {
-    setColor(color)
-  }
-
   return (
-    <div className={`home painted--${color}`}>
-      <div className="left">
+    <div className="home">
+      <main className="left">
         <h1 className="title">Eva Tellier</h1>
-        <h2
-          className={`bio ${openStates.about && 'is--open'}`}
-          onClick={() => handleClick('about', refs)}
-        >
-          About / CV
-        </h2>
-        <a href="mailto:evatellier16@gmail.com"
-          className="mail"
-        >
-          mailto:evatellier16@gmail.com
+        {info.map((tab, i) => (
+          <h2
+            key={i}
+            className={`bio ${openStates[tab.slug] && "is--open"}`}
+            onClick={() => handleClick(tab.slug, refs)}
+          >
+            {tab.title}
+          </h2>
+        ))}
+        <a href="mailto:evatellier16@gmail.com" className="mail">
+          eva@evatellier.com
         </a>
-        {/* <div className="palette">
-          <div className={`swatch primary ${(color === 'primary' && 'is--active')}`} onClick={() => handleColor('primary') }/>
-          <div className={`swatch secondary ${(color === 'secondary' && 'is--active')}`} onClick={() =>  handleColor('secondary')}/>
-          <div className={`swatch tertiary ${(color === 'tertiary' && 'is--active')}`} onClick={() => handleColor('tertiary') }/>
-          <div className={`swatch quaternary ${(color === 'quaternary' && 'is--active')}`} onClick={() => handleColor('quaternary') }/>
-          <div className={`swatch quinary ${(color === 'quinary' && 'is--active')}`} onClick={() => handleColor('quinary') }/>
-        </div> */}
-        <h3
-          className={`project-title ${openStates.euphrates && 'is--open'}`}
-          onClick={() => handleClick('euphrates', refs)}
-        >
-          Euphrates
-        </h3>
-        <h4 className="project-year">2021</h4>
-        <h3
-          className={`project-title ${openStates.tigris && 'is--open'}`}
-          onClick={() => handleClick('tigris', refs)}
-        >
-          Tigris
-        </h3>
-        <h4 className="project-year">2021</h4>
-        <h3
-          className={`project-title ${openStates.sakarya && 'is--open'}`}
-          onClick={() => handleClick('sakarya', refs)}
-        >
-          Sakarya
-        </h3>
-        <h4 className="project-year">2019</h4>
-      </div>
-      <Gridz
-        refs={refs}
-        falseStates={falseStates}
-        openStates={openStates}
-        handleClick={handleClick}
-      />
+        {projects.map((tab, i) => (
+          <>
+            <h3
+              key={i}
+              className={`project-title ${openStates[tab.slug] && "is--open"}`}
+              onClick={() => handleClick(tab.slug, refs)}
+            >
+              {tab.title}
+            </h3>
+            <h4
+              key={i}
+              className={
+                i + 1 < projects.length ? "project-year" : "project-year last"
+              }
+            >
+              {tab.year}
+            </h4>
+          </>
+        ))}
+      </main>
+      <main className="right">
+        <Projects
+          projects={projects}
+          refs={refs}
+          falseStates={falseStates}
+          openStates={openStates}
+          handleClick={handleClick}
+        />
+        <Info
+          info={info}
+          refs={refs}
+          falseStates={falseStates}
+          openStates={openStates}
+          handleClick={handleClick}
+        />
+      </main>
     </div>
   );
 };

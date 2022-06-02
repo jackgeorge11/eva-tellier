@@ -1,0 +1,33 @@
+@use "sass:math";
+
+@mixin media {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin responsive-font($fs) {
+  font-size: #{$fs}rem;
+
+  @include media {
+    font-size: #{math.div($fs, 1.3)}rem;
+  }
+}
+
+@mixin margin($t, $r, $b, $l) {
+  margin: #{$t}rem #{$r}rem #{$b}rem #{$l}rem;
+
+  @include media {
+    margin: #{math.div($t, 1.3)}rem #{math.div($r, 1.3)}rem #{math.div($b, 1.3)}rem
+      #{math.div($l, 1.3)}rem;
+  }
+}
+
+@mixin padding($t, $r, $b, $l) {
+  padding: #{$t}rem #{$r}rem #{$b}rem #{$l}rem;
+
+  @include media {
+    padding: #{math.div($t, 1.3)}rem #{math.div($r, 1.3)}rem #{math.div($b, 1.3)}rem
+      #{math.div($l, 1.3)}rem;
+  }
+}

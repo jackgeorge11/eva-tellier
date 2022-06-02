@@ -1,0 +1,158 @@
+.right {
+  width: calc(70% - #{$m-sm}rem);
+  display: flex;
+  height: fit-content;
+
+  @include media {
+    flex: 1;
+    height: 0;
+    width: 100%;
+  }
+
+  .project {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    width: calc(#{$m-xlg}rem - 2px);
+    border-left: 1px dashed $primary;
+    border-right: 1px dashed $primary;
+    content: " ";
+    cursor: pointer;
+    transition: all $short, flex $short $short;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    @include media {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .tab-content {
+      width: calc(100% - #{$m-md * 2}rem);
+      padding: #{$m-md}rem 0 #{$m-xlg}rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .gatsby-image-wrapper {
+      overflow: visible;
+      @include padding($m-md, 0, $m-md, 0);
+      opacity: 0;
+      transition: all $short;
+      max-width: 750px;
+      align-self: flex-start;
+      @include margin($m-lg, 0, $m-lg, 0);
+      border: 1px dashed $primary;
+    }
+
+    .rich-text {
+      transition: all $short;
+      align-self: flex-start;
+      opacity: 0;
+      align-self: flex-start;
+    }
+
+    h1 {
+      @include responsive-font($lg);
+      font-weight: $thick;
+      @include margin($m-xlg, 0, $m-md, 0);
+    }
+
+    h2 {
+      @include responsive-font($md);
+      @include margin($m-lg, 0, $m-sm, 0);
+      font-weight: $thick;
+    }
+
+    p {
+      @include responsive-font($sm);
+      font-weight: $thin;
+      @include margin($m-sm, 0, 0, 0);
+    }
+
+    a {
+      color: $clay;
+      text-decoration: none;
+      font-weight: $thick;
+      opacity: 0.65;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 1;
+      }
+    }
+
+    h3 {
+      white-space: nowrap;
+      @include responsive-font($md);
+      font-weight: $thin;
+      position: absolute;
+
+      &.year {
+        right: calc(-#{$m-sm}rem - 2px);
+        bottom: 0;
+        transform: rotate(-90deg);
+        transform-origin: 0 0;
+        margin: 0;
+      }
+
+      &.intro {
+        right: calc(#{$m-sm}rem - 2px);
+        top: -#{$m-sm}rem;
+        transform: rotate(-90deg);
+        transform-origin: 100% 100%;
+        opacity: $light;
+        transition: all $short $short;
+        margin: 0;
+      }
+    }
+
+    &.about {
+      &.first {
+        margin-left: auto;
+      }
+      .year {
+        left: 2px;
+      }
+    }
+
+    &:hover {
+      width: calc(#{$m-xlg * 1.5}rem - 2px);
+    }
+
+    &.is--open {
+      transition: all $short;
+      flex: 1;
+      overflow: scroll;
+      cursor: auto;
+
+      &:hover {
+        width: auto;
+      }
+
+      .rich-text {
+        transition: opacity 5s 10s;
+        opacity: 1;
+      }
+
+      .intro {
+        opacity: 0;
+        transition: opacity $short;
+      }
+
+      .year {
+        opacity: 0;
+        transition: opacity $short;
+      }
+
+      .gatsby-image-wrapper {
+        transition: all $short, opacity $short $short;
+        opacity: 1;
+      }
+    }
+  }
+}

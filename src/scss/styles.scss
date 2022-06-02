@@ -1,10 +1,14 @@
-@import 'variables';
-// @import 'mixins';
-@import 'gridz';
-@import 'home';
+@import "variables";
+@import "mixins";
+@import "tabs";
+@import "home";
 
 body {
-    color: $primary;
-    font-family: $font;
-    margin: 0;
+  color: $primary;
+  font-family: $font;
+  margin: 0;
+
+  * {
+    transition: all $short ease;
+  }
 }
