@@ -21,12 +21,14 @@
     "gatsby": "^4.15.2",
     "gatsby-plugin-image": "^2.15.1",
     "gatsby-plugin-manifest": "^4.15.1",
+    "gatsby-plugin-react-helmet": "^5.15.0",
     "gatsby-plugin-sass": "^5.15.1",
     "gatsby-plugin-sharp": "^4.15.1",
     "gatsby-source-contentful": "^7.13.1",
     "gatsby-transformer-sharp": "^4.15.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
     "sass": "^1.52.1"
   }
 }

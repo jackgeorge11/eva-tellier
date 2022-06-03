@@ -3,6 +3,7 @@ import "../scss/styles.scss";
 import Projects from "../components/Projects";
 import { useStaticQuery, graphql } from "gatsby";
 import Info from "../components/Info";
+import Helmet from "react-helmet";
 
 const IndexPage = () => {
   const { allContentfulInfo, allContentfulProject } = useStaticQuery(graphql`
@@ -88,6 +89,12 @@ const IndexPage = () => {
 
   return (
     <div className="home">
+      <Helmet>
+        <title>Eva Tellier</title>
+        <meta name="description" content="Eva Tellier is sculptor and ceramicist based in Montreal, QC." />
+        <meta name="keywords" content="sculpture, ceramics, clay, art, artist, portfolio" />
+        <meta name="author" content="Eva Tellier" />
+      </Helmet>
       <main className="left">
         <h1 className="title">Eva Tellier</h1>
         {info.map((tab, i) => (
