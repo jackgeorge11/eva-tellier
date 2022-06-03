@@ -4,22 +4,15 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.evatellier.com",
-    title: "Eva Tellier",
+    siteUrl: "https://www.preview.evatellier.com",
+    title: "Eva Tellier (Preview)",
   },
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "images",
-    //     path: "./src/",
-    //   },
-    //   __key: "images",
-    // },
+    "gatsby-plugin-react-helmet",
     {
       resolve: `gatsby-source-contentful`,
       options: {

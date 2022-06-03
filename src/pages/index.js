@@ -4,6 +4,7 @@ import Projects from "../components/Projects";
 import { useStaticQuery, graphql } from "gatsby";
 import Info from "../components/Info";
 import axios from "axios";
+import Helmet from "react-helmet";
 
 const IndexPage = () => {
   const { allContentfulInfo, allContentfulProject } = useStaticQuery(graphql`
@@ -96,6 +97,9 @@ const IndexPage = () => {
 
   return (
     <div className="home">
+      <Helmet>
+        <meta name="robots" content="noindex"></meta>
+      </Helmet>
       <main className="left">
         <h1 className="title">
           Eva Tellier <button onClick={() => refresh()}>(refresh)</button>
