@@ -27,6 +27,20 @@
       @include responsive-font($xlg);
       font-weight: $reg;
       @include margin($m-xlg, 0, $m-sm, 0);
+
+      button {
+        background: none;
+        margin: 0;
+        padding: 0;
+        border: none;
+        color: $clay;
+        opacity: .65;
+
+        &:hover {
+          opacity: 1;
+          cursor: pointer;
+        }
+      }
     }
 
     .bio {

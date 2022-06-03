@@ -3,6 +3,7 @@ import "../scss/styles.scss";
 import Projects from "../components/Projects";
 import { useStaticQuery, graphql } from "gatsby";
 import Info from "../components/Info";
+import axios from "axios";
 
 const IndexPage = () => {
   const { allContentfulInfo, allContentfulProject } = useStaticQuery(graphql`
@@ -86,10 +87,19 @@ const IndexPage = () => {
     });
   };
 
+  const refresh = async () => {
+    await axios.post("/__refresh").then((res) => {
+      console.log(res);
+      window?.location?.reload();
+    });
+  };
+
   return (
     <div className="home">
       <main className="left">
-        <h1 className="title">Eva Tellier</h1>
+        <h1 className="title">
+          Eva Tellier <button onClick={() => refresh()}>(refresh)</button>
+        </h1>
         {info.map((tab, i) => (
           <h2
             key={i}
