@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   apps: [
     {
-      name: "eva-tellier",
+      name: "evatellier",
       script: "npm",
       args: "start",
       watch: false,
